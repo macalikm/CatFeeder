@@ -2,7 +2,7 @@
 #include <Adafruit_MotorShield.h>
 #include <SPI.h>
 
-// MLM
+// MLM 1
 // Create the motor shield object with the default I2C address
 Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 // Or, create it with a different I2C address (say for stacking)
