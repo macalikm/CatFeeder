@@ -45,12 +45,12 @@ void loop() {
 
   AlertTheCat();
   
-//  SingleCoil();
+//SingleCoil();
   DoubleCoilRev();
   DoubleCoilFwd();
   DoubleCoilRev();
-//  InterleavedCoil();
-//  MicrostepCoil();
+//InterleavedCoil();
+//MicrostepCoil();
   
   myMotor->release();
   delay(1*MINUTE);
@@ -100,10 +100,10 @@ void AlertTheCat()
   Serial.println("Calling All Cats!");
   for (int t=0;t <2; t++) {
     for (int i=1;i < 4; i++) {
-    tone(buzzerPin, (700*i));
+    tone(buzzerPin, (500*(0.5*i)));
       delay(600);
       noTone(buzzerPin);
-      delay (100);
+      delay (50);
     }
   }
 }
