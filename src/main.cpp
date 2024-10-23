@@ -18,7 +18,7 @@ const unsigned long HOUR = 3600*SECOND;
 const unsigned long REVOLUTION = 200;
 
 void SingleCoil();
-void DoubleCoilFwd();
+void DoubleCoilFwd(int);
 void DoubleCoilRev();
 void InterleavedCoil();
 void MicrostepCoil();
@@ -47,7 +47,7 @@ void loop() {
   
 //SingleCoil();
   DoubleCoilRev();
-  DoubleCoilFwd();
+  DoubleCoilFwd(REVOLUTION*2);
   DoubleCoilRev();
 //InterleavedCoil();
 //MicrostepCoil();
@@ -71,11 +71,11 @@ void InterleavedCoil()
   myMotor->step(100, BACKWARD, INTERLEAVE);
 }
 
-void DoubleCoilFwd()
+void DoubleCoilFwd(int rev)
 {
   Serial.println("Double coil steps");
   for (int i=0;i < 5; i++) {
-  myMotor->step((REVOLUTION*2), FORWARD, DOUBLE);
+  myMotor->step(rev, FORWARD, DOUBLE);
   //  myMotor->step(100, BACKWARD, DOUBLE);
   }
 }
