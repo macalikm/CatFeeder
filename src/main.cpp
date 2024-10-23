@@ -22,12 +22,15 @@ void DoubleCoilFwd();
 void DoubleCoilRev();
 void InterleavedCoil();
 void MicrostepCoil();
-
+void AlertTheCat();
+const int buzzerPin = 13;
 void setup() 
 {
   Serial.begin(9600);           // set up Serial library at 9600 bps
   while (!Serial);
   Serial.println("Stepper test!");
+
+  pinMode(buzzerPin, OUTPUT);
 
   if (!AFMS.begin()) {         // create with the default frequency 1.6KHz
   // if (!AFMS.begin(1000)) {  // OR with a different frequency, say 1KHz
@@ -39,15 +42,19 @@ void setup()
 }
 
 void loop() {
+
+  AlertTheCat();
   
 //  SingleCoil();
   DoubleCoilRev();
   DoubleCoilFwd();
+  DoubleCoilRev();
 //  InterleavedCoil();
 //  MicrostepCoil();
   
   myMotor->release();
-  delay(15*MINUTE);
+  delay(1*MINUTE);
+  
 }
 
 void SingleCoil()
@@ -78,7 +85,7 @@ void DoubleCoilRev()
   Serial.println("Double coil steps");
   for (int i=0;i < 5; i++) {
   //myMotor->step(REVOLUTION, FORWARD, DOUBLE);
-  myMotor->step(100, BACKWARD, DOUBLE);
+  myMotor->step((REVOLUTION/4), BACKWARD, DOUBLE);
   }
 }
 void MicrostepCoil()
@@ -86,4 +93,17 @@ void MicrostepCoil()
   Serial.println("Microstep steps");
   myMotor->step(50, FORWARD, MICROSTEP);
   myMotor->step(50, BACKWARD, MICROSTEP);
+}
+
+void AlertTheCat()
+{
+  Serial.println("Calling All Cats!");
+  for (int t=0;t <2; t++) {
+    for (int i=1;i < 4; i++) {
+    tone(buzzerPin, (700*i));
+      delay(600);
+      noTone(buzzerPin);
+      delay (100);
+    }
+  }
 }
