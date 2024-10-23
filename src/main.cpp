@@ -100,7 +100,7 @@ void AlertTheCat()
   Serial.println("Calling All Cats!");
   for (int t=0;t <2; t++) {
     for (int i=1;i < 4; i++) {
-    tone(buzzerPin, (500*(0.5*i)));
+      tone(buzzerPin, (500*(0.5*i)));
       delay(600);
       noTone(buzzerPin);
       delay (50);
