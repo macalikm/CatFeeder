@@ -17,11 +17,11 @@ const unsigned long MINUTE = 60*SECOND;
 const unsigned long HOUR = 3600*SECOND;
 const unsigned long REVOLUTION = 200;
 
-void SingleCoil();
+void SingleCoil(int);
 void DoubleCoilFwd(int);
-void DoubleCoilRev();
-void InterleavedCoil();
-void MicrostepCoil();
+void DoubleCoilRev(int);
+void InterleavedCoil(int);
+void MicrostepCoil(int);
 void AlertTheCat();
 const int buzzerPin = 13;
 void setup() 
@@ -45,23 +45,23 @@ void loop() {
 
   AlertTheCat();
   
+  DoubleCoilRev(REVOLUTION);
+  DoubleCoilFwd(REVOLUTION*4);
+  DoubleCoilRev(REVOLUTION);
 //SingleCoil();
-  DoubleCoilRev();
-  DoubleCoilFwd(REVOLUTION*2);
-  DoubleCoilRev();
 //InterleavedCoil();
 //MicrostepCoil();
   
   myMotor->release();
-  delay(1*MINUTE);
+  delay(HOUR*4);
   
 }
 
-void SingleCoil()
+void SingleCoil(int rev)
 {
   Serial.println("Single coil steps");
-  myMotor->step(REVOLUTION, FORWARD, SINGLE);
-  myMotor->step(REVOLUTION, BACKWARD, SINGLE);
+  myMotor->step(rev, FORWARD, SINGLE);
+  myMotor->step(rev, BACKWARD, SINGLE);
 }
 
 void InterleavedCoil()
@@ -80,12 +80,12 @@ void DoubleCoilFwd(int rev)
   }
 }
 
-void DoubleCoilRev()
+void DoubleCoilRev(int rev)
 {
   Serial.println("Double coil steps");
   for (int i=0;i < 5; i++) {
-  //myMotor->step(REVOLUTION, FORWARD, DOUBLE);
-  myMotor->step((REVOLUTION/4), BACKWARD, DOUBLE);
+  //myMotor->step(REvolution, FORWARD, DOUBLE);
+  myMotor->step(rev, BACKWARD, DOUBLE);
   }
 }
 void MicrostepCoil()
