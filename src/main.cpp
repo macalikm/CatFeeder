@@ -53,7 +53,7 @@ void loop() {
 //MicrostepCoil();
   
   myMotor->release();
-  delay(HOUR*4);
+  delay(HOUR*5);
   
 }
 
