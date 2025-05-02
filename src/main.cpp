@@ -45,9 +45,9 @@ void loop() {
 
   AlertTheCat();
   
-  DoubleCoilRev(REVOLUTION/4);
+  DoubleCoilRev(REVOLUTION*2);
   DoubleCoilFwd(REVOLUTION*2);
-  DoubleCoilRev(REVOLUTION/4);
+  DoubleCoilRev(REVOLUTION*2);
 //SingleCoil();
 //InterleavedCoil();
 //MicrostepCoil();
